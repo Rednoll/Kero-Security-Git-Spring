@@ -36,6 +36,8 @@ dependencies {
 	implementation 'com.github.Rednoll:Kero-Security:master-SNAPSHOT'
 	implementation 'com.github.Rednoll:Kero-Security-Git:master-SNAPSHOT'
 	implementation 'com.github.Rednoll:Kero-Security-Spring:master-SNAPSHOT'
+	
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:5.7.+'
 }
 
 test {
