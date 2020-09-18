@@ -35,6 +35,7 @@ dependencies {
 
 	implementation 'com.github.Rednoll:Kero-Security:master-SNAPSHOT'
 	implementation 'com.github.Rednoll:Kero-Security-Git:master-SNAPSHOT'
+	implementation 'com.github.Rednoll:Kero-Security-Spring:master-SNAPSHOT'
 }
 
 test {

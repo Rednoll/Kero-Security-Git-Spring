@@ -1,6 +1,0 @@
-scheme TestObject(D) {
-
-	text(D): -MS
-	childs(D): +OWNER
-		- propagation: OWNER -> MS
-}

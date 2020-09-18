@@ -1,5 +1,8 @@
 package com.kero.security.spring.test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.kero.security.core.agent.KeroAccessAgent;
 import com.kero.security.core.agent.configurator.KeroAccessAgentConfigruatorBeans;
+import com.kero.security.core.exception.AccessException;
 import com.kero.security.spring.config.KeroAccessAgentConfiguration;
 import com.kero.security.spring.config.KeroAccessAgentFactoryConfiguration;
+import com.kero.security.spring.config.KeroAccessAgentFactoryGitConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {KeroAccessAgentConfiguration.class, KeroAccessAgentFactoryConfiguration.class, KeroAccessAgentConfigruatorBeans.class})
+@SpringBootTest(classes = {KeroAccessAgentConfiguration.class, KeroAccessAgentFactoryGitConfiguration.class, KeroAccessAgentConfigruatorBeans.class, KeroAccessAgentFactoryConfiguration.class})
 @ActiveProfiles("test")
 public class MainTest {
 	
@@ -23,27 +28,17 @@ public class MainTest {
 	@Test
 	public void test() {
 		
-		/*
-		AccessRule defaultRule = agent.getOrCreateScheme(TestObjectImpl.class).getOrCreateLocalProperty("text").getDefaultRule();
+		TestGitObject ownerProtected = agent.protect(new TestGitObject(), "OWNER");
 		
-		System.out.println("defaultRule: "+defaultRule);
-		
-		TestObjectImpl obj = new TestObjectImpl("kek");
-			obj.getChilds().add(new TestObjectImpl("lol"));
-		
-		TestObjectImpl ms = agent.protect(obj, "MS");
-		
-		assertThrows(AccessException.class, ms::getText);
+		assertDoesNotThrow(ownerProtected::getText);
+		assertDoesNotThrow(ownerProtected::getObj2);
 	
-		TestObjectImpl owner = agent.protect(obj, "OWNER");
+		TestGitObject msProtected = agent.protect(new TestGitObject(), "MS");
 		
-		assertDoesNotThrow(owner::getText);
+		assertThrows(AccessException.class, msProtected::getObj2);
 		
-		assertThrows(AccessException.class, owner.getChilds().get(0)::getText);
+		TestGitObject2 obj2 = agent.protect(new TestGitObject2(), "OWNER");
 		
-		TestObjectImpl common = agent.protect(obj, "COMMON");
-		
-		assertThrows(AccessException.class, owner::getText);
-		*/
+		assertThrows(AccessException.class, obj2::getKek);
 	}
 }
