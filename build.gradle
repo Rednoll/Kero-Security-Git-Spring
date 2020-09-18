@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java-library'
+}
+
+group = 'com.kero'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+
+	mavenCentral()
+	
+	maven { url 'https://jitpack.io' }
+}
+
+bootJar {
+
+   enabled = false
+}
+
+jar {
+	
+	enabled = true
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-autoconfigure'
+	
+	implementation 'org.slf4j:slf4j-api:1.7.25'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+	implementation 'com.github.Rednoll:Kero-Security:master-SNAPSHOT'
+	implementation 'com.github.Rednoll:Kero-Security-Git:master-SNAPSHOT'
+}
+
+test {
+	useJUnitPlatform()
+}
