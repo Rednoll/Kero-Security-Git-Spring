@@ -5,13 +5,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +16,7 @@ import com.kero.security.core.agent.KeroAccessAgentFactory;
 import com.kero.security.core.agent.configurator.AccessAgentGitResourceConfigurator;
 
 @Configuration
-public class KeroAccessAgentFactoryGitConfiguration {
+public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFactorySpringConfiguration {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger("Kero-Security-Git-Spring");
 	
@@ -47,11 +44,8 @@ public class KeroAccessAgentFactoryGitConfiguration {
 	@Value("${kero.security.lang.provider.cache.enabled:true}")
 	private boolean providerCacheEnabled;
 	
-	@Autowired
-	private KeroAccessAgentFactory factory;
-	
-	@PostConstruct
-	public void configure() throws Exception {
+	@Override
+	public void configure(KeroAccessAgentFactory factory) {
 		
 		if(this.resourceGitRemote == null
 		&& this.resourceGitBranch == null) return;
@@ -70,23 +64,30 @@ public class KeroAccessAgentFactoryGitConfiguration {
 			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitLogin, this.resourceGitPass);
 		}
 		
-		URI remote = new URI(resourceGitRemote);
-		String branch = this.resourceGitBranch;
-		Set<String> suffixes = new HashSet<>(Arrays.asList(this.resourceGitSuffixes));
-		
-		AccessAgentGitResourceConfigurator conf =
-			new AccessAgentGitResourceConfigurator(credentials, remote, branch, resourceCacheEnabled, providerCacheEnabled, suffixes);
-	
-		factory.addConfigurator(conf);
-		
-		StringBuilder debugLog = new StringBuilder();
-			debugLog.append("Successful add AccessAgentGitResourceConfigurator:");
-			debugLog.append("\n  remote: "+remote);
-			debugLog.append("\n  branch: "+branch);
-			debugLog.append("\n  token: "+this.resourceGitToken);
-			debugLog.append("\n  login: "+this.resourceGitLogin);
-			debugLog.append("\n  pass: "+this.resourceGitPass);
+		try {
 			
-		LOGGER.debug(debugLog.toString());
+			URI remote = new URI(resourceGitRemote);
+			String branch = this.resourceGitBranch;
+			Set<String> suffixes = new HashSet<>(Arrays.asList(this.resourceGitSuffixes));
+			
+			AccessAgentGitResourceConfigurator conf =
+				new AccessAgentGitResourceConfigurator(credentials, remote, branch, resourceCacheEnabled, providerCacheEnabled, suffixes);
+		
+			factory.addConfigurator(conf);
+			
+			StringBuilder debugLog = new StringBuilder();
+				debugLog.append("Successful add AccessAgentGitResourceConfigurator:");
+				debugLog.append("\n  remote: "+remote);
+				debugLog.append("\n  branch: "+branch);
+				debugLog.append("\n  token: "+this.resourceGitToken);
+				debugLog.append("\n  login: "+this.resourceGitLogin);
+				debugLog.append("\n  pass: "+this.resourceGitPass);
+				
+			LOGGER.debug(debugLog.toString());
+		}
+		catch(Exception e) {
+			
+			throw new RuntimeException(e);
+		}
 	}
 }

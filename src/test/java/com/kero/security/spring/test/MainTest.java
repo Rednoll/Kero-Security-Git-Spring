@@ -13,12 +13,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.kero.security.core.agent.KeroAccessAgent;
 import com.kero.security.core.agent.configurator.KeroAccessAgentConfigruatorBeans;
 import com.kero.security.core.exception.AccessException;
-import com.kero.security.spring.config.KeroAccessAgentConfiguration;
-import com.kero.security.spring.config.KeroAccessAgentFactoryConfiguration;
+import com.kero.security.spring.config.KeroAccessAgentBean;
+import com.kero.security.spring.config.KeroAccessAgentFactoryBean;
 import com.kero.security.spring.config.KeroAccessAgentFactoryGitConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {KeroAccessAgentConfiguration.class, KeroAccessAgentFactoryGitConfiguration.class, KeroAccessAgentConfigruatorBeans.class, KeroAccessAgentFactoryConfiguration.class})
+@SpringBootTest(classes = {KeroAccessAgentBean.class, KeroAccessAgentFactoryGitConfiguration.class, KeroAccessAgentConfigruatorBeans.class, KeroAccessAgentFactoryBean.class})
 @ActiveProfiles("test")
 public class MainTest {
 	

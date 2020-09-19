@@ -33,9 +33,9 @@ dependencies {
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 
-	implementation 'com.github.Rednoll:Kero-Security:master-SNAPSHOT'
-	implementation 'com.github.Rednoll:Kero-Security-Git:master-SNAPSHOT'
-	implementation 'com.github.Rednoll:Kero-Security-Spring:master-SNAPSHOT'
+	implementation 'com.github.Rednoll:Kero-Security:-SNAPSHOT'
+	implementation 'com.github.Rednoll:Kero-Security-Git:-SNAPSHOT'
+	implementation 'com.github.Rednoll:Kero-Security-Spring:-SNAPSHOT'
 	
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:5.7.+'
 }
