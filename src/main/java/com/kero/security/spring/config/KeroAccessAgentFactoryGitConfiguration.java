@@ -29,8 +29,8 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 	@Value("${kero.security.lang.resource.git.token:#{null}}")
 	private String resourceGitToken;
 	
-	@Value("${kero.security.lang.resource.git.login:#{null}}")
-	private String resourceGitLogin;
+	@Value("${kero.security.lang.resource.git.username:#{null}}")
+	private String resourceGitUsername;
 	
 	@Value("${kero.security.lang.resource.git.pass:#{null}}")
 	private String resourceGitPass;
@@ -59,9 +59,9 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 			
 			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitToken, "");
 		}
-		else if(this.resourceGitLogin != null && this.resourceGitPass != null) {
+		else if(this.resourceGitUsername != null && this.resourceGitPass != null) {
 			
-			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitLogin, this.resourceGitPass);
+			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitUsername, this.resourceGitPass);
 		}
 		
 		try {
@@ -80,7 +80,7 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 				debugLog.append("\n  remote: "+remote);
 				debugLog.append("\n  branch: "+branch);
 				debugLog.append("\n  token: "+this.resourceGitToken);
-				debugLog.append("\n  login: "+this.resourceGitLogin);
+				debugLog.append("\n  username: "+this.resourceGitUsername);
 				debugLog.append("\n  pass: "+this.resourceGitPass);
 				
 			LOGGER.debug(debugLog.toString());
