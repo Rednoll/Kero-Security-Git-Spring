@@ -21,22 +21,22 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 	private static Logger LOGGER = LoggerFactory.getLogger("Kero-Security-Git-Spring");
 	
 	@Value("${kero.security.lang.resource.git.remote:#{null}}")
-	private String resourceGitRemote;
+	private String rawRemote;
 	
 	@Value("${kero.security.lang.resource.git.branch:#{null}}")
-	private String resourceGitBranch;
+	private String branch;
 	
 	@Value("${kero.security.lang.resource.git.token:#{null}}")
-	private String resourceGitToken;
+	private String token;
 	
 	@Value("${kero.security.lang.resource.git.username:#{null}}")
-	private String resourceGitUsername;
+	private String username;
 	
 	@Value("${kero.security.lang.resource.git.pass:#{null}}")
-	private String resourceGitPass;
+	private String pass;
 	
 	@Value("${kero.security.lang.resource.git.suffixes:.k-s,.ks}")
-	private String[] resourceGitSuffixes;
+	private String[] rawSuffixes;
 	
 	@Value("${kero.security.lang.resource.cache.enabled:true}")
 	private boolean resourceCacheEnabled;
@@ -47,28 +47,28 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 	@Override
 	public void configure(KeroAccessAgentFactory factory) {
 		
-		if(this.resourceGitRemote == null
-		&& this.resourceGitBranch == null) return;
+		if(this.rawRemote == null
+		&& this.branch == null) return;
 		
-		if(this.resourceGitRemote == null) throw new RuntimeException("kero.security.lang.resource.git.remote not specified!");
-		if(this.resourceGitBranch == null) throw new RuntimeException("kero.security.lang.resource.git.branch not specified!");
+		if(this.rawRemote == null) throw new RuntimeException("kero.security.lang.resource.git.remote not specified!");
+		if(this.branch == null) throw new RuntimeException("kero.security.lang.resource.git.branch not specified!");
 		
 		CredentialsProvider credentials = null;
 		
-		if(this.resourceGitToken != null) {
+		if(this.token != null) {
 			
-			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitToken, "");
+			credentials = new UsernamePasswordCredentialsProvider(this.token, "");
 		}
-		else if(this.resourceGitUsername != null && this.resourceGitPass != null) {
+		else if(this.username != null && this.pass != null) {
 			
-			credentials = new UsernamePasswordCredentialsProvider(this.resourceGitUsername, this.resourceGitPass);
+			credentials = new UsernamePasswordCredentialsProvider(this.username, this.pass);
 		}
 		
 		try {
 			
-			URI remote = new URI(resourceGitRemote);
-			String branch = this.resourceGitBranch;
-			Set<String> suffixes = new HashSet<>(Arrays.asList(this.resourceGitSuffixes));
+			URI remote = new URI(rawRemote);
+			String branch = this.branch;
+			Set<String> suffixes = new HashSet<>(Arrays.asList(this.rawSuffixes));
 			
 			AccessAgentGitResourceConfigurator conf =
 				new AccessAgentGitResourceConfigurator(credentials, remote, branch, resourceCacheEnabled, providerCacheEnabled, suffixes);
@@ -79,9 +79,9 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 				debugLog.append("Successful add AccessAgentGitResourceConfigurator:");
 				debugLog.append("\n  remote: "+remote);
 				debugLog.append("\n  branch: "+branch);
-				debugLog.append("\n  token: "+this.resourceGitToken);
-				debugLog.append("\n  username: "+this.resourceGitUsername);
-				debugLog.append("\n  pass: "+this.resourceGitPass);
+				debugLog.append("\n  token: "+this.token);
+				debugLog.append("\n  username: "+this.username);
+				debugLog.append("\n  pass: "+this.pass);
 				
 			LOGGER.debug(debugLog.toString());
 		}
