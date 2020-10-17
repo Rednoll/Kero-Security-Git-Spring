@@ -3,6 +3,7 @@ package com.kero.security.spring.test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.kero.security.spring.config.KeroAccessAgentFactoryGitConfiguration;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {KeroAccessAgentBean.class, KeroAccessAgentFactoryGitConfiguration.class, KeroAccessAgentConfiguratorBeans.class, KeroAccessAgentFactoryBean.class})
 @ActiveProfiles("test")
+@Ignore
 public class MainTest {
 	
 	@Autowired
