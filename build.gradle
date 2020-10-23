@@ -89,6 +89,9 @@ dependencies {
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:[5.7,)'
+	implementation 'org.springframework.boot:spring-boot:[2.0,)'
+	
 	implementation 'com.github.rednoll:kero-security:[0.1,)'
 	implementation 'com.github.rednoll:kero-security-git:[0.1,)'
 	implementation 'com.github.rednoll:kero-security-spring:[0.1,)'
