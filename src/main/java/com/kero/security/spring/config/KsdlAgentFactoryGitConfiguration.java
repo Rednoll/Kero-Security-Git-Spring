@@ -16,7 +16,7 @@ import com.kero.security.core.agent.configurator.KsdlAgentGitResourceConfigurato
 import com.kero.security.ksdl.agent.KsdlAgentFactory;
 
 @Configuration
-public class KeroAccessAgentFactoryGitConfiguration implements KsdlAgentFactorySpringConfiguration {
+public class KsdlAgentFactoryGitConfiguration implements KsdlAgentFactorySpringConfiguration {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger("Kero-Security-Git-Spring");
 	

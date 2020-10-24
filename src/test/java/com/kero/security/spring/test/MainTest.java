@@ -16,10 +16,10 @@ import com.kero.security.core.agent.configurator.KeroAccessAgentConfiguratorBean
 import com.kero.security.core.exception.AccessException;
 import com.kero.security.spring.config.KeroAccessAgentBean;
 import com.kero.security.spring.config.KeroAccessAgentFactoryBean;
-import com.kero.security.spring.config.KeroAccessAgentFactoryGitConfiguration;
+import com.kero.security.spring.config.KsdlAgentFactoryGitConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {KeroAccessAgentBean.class, KeroAccessAgentFactoryGitConfiguration.class, KeroAccessAgentConfiguratorBeans.class, KeroAccessAgentFactoryBean.class})
+@SpringBootTest(classes = {KeroAccessAgentBean.class, KsdlAgentFactoryGitConfiguration.class, KeroAccessAgentConfiguratorBeans.class, KeroAccessAgentFactoryBean.class})
 @ActiveProfiles("test")
 @Ignore
 public class MainTest {
