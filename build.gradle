@@ -69,16 +69,11 @@ description = 'Kero-Security-Git-Spring - auto configuration Git repositories as
 repositories {
 
 	mavenCentral()
-}
-
-bootJar {
-
-   enabled = false
-}
-
-jar {
 	
-	enabled = true
+	maven {
+
+		url "https://oss.sonatype.org/content/repositories/snapshots"
+	}
 }
 
 dependencies {
@@ -92,9 +87,20 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:[5.7,)'
 	implementation 'org.springframework.boot:spring-boot:[2.0,)'
 	
-	implementation 'com.github.rednoll:kero-security:[0.1,)'
-	implementation 'com.github.rednoll:kero-security-git:[0.1,)'
-	implementation 'com.github.rednoll:kero-security-spring:[0.1,)'
+	implementation 'com.github.rednoll:kero-security:0.2.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-ksdl:0.0.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-git:0.2.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-spring:0.2.0-SNAPSHOT'
+}
+
+bootJar {
+
+   enabled = false
+}
+
+jar {
+	
+	enabled = true
 }
 
 java {

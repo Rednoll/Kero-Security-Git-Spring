@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-import com.kero.security.core.agent.KeroAccessAgentFactory;
-import com.kero.security.core.agent.configurator.AccessAgentGitResourceConfigurator;
+import com.kero.security.core.agent.configurator.KsdlAgentGitResourceConfigurator;
+import com.kero.security.ksdl.agent.KsdlAgentFactory;
 
 @Configuration
-public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFactorySpringConfiguration {
+public class KeroAccessAgentFactoryGitConfiguration implements KsdlAgentFactorySpringConfiguration {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger("Kero-Security-Git-Spring");
 	
@@ -37,15 +37,9 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 	
 	@Value("${kero.security.lang.resource.git.suffixes:.k-s,.ks}")
 	private String[] rawSuffixes;
-	
-	@Value("${kero.security.lang.resource.cache.enabled:true}")
-	private boolean resourceCacheEnabled;
-	
-	@Value("${kero.security.lang.provider.cache.enabled:true}")
-	private boolean providerCacheEnabled;
-	
+
 	@Override
-	public void configure(KeroAccessAgentFactory factory) {
+	public void configure(KsdlAgentFactory factory) {
 		
 		if(this.rawRemote == null
 		&& this.branch == null) return;
@@ -70,8 +64,8 @@ public class KeroAccessAgentFactoryGitConfiguration implements KeroAccessAgentFa
 			String branch = this.branch;
 			Set<String> suffixes = new HashSet<>(Arrays.asList(this.rawSuffixes));
 			
-			AccessAgentGitResourceConfigurator conf =
-				new AccessAgentGitResourceConfigurator(credentials, remote, branch, resourceCacheEnabled, providerCacheEnabled, suffixes);
+			KsdlAgentGitResourceConfigurator conf =
+				new KsdlAgentGitResourceConfigurator(credentials, remote, branch, suffixes);
 		
 			factory.addConfigurator(conf);
 			
