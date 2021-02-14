@@ -88,7 +88,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot:[2.0,)'
 	
 	implementation 'com.github.rednoll:kero-security:0.2.0-SNAPSHOT'
-	implementation 'com.github.rednoll:kero-security-ksdl:0.0.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-ksdl:0.2.0-SNAPSHOT'
 	implementation 'com.github.rednoll:kero-security-git:0.2.0-SNAPSHOT'
 	implementation 'com.github.rednoll:kero-security-spring:0.2.0-SNAPSHOT'
 }
